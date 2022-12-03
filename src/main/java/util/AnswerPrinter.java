@@ -15,6 +15,7 @@ public class AnswerPrinter {
                 answer,
                 contextToString(context),
                 appendix);
+        System.out.println();
     }
 
     // print answer without context details
@@ -25,6 +26,7 @@ public class AnswerPrinter {
                 part,
                 answer,
                 appendix);
+        System.out.println();
     }
 
     static private String contextToString(Map<String, Object> context) {
