@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class P03_RugsackReorganisation {
 
-    static boolean TEST = false;
+    static boolean TEST = true;
 
     public static void main (String[] args) {
         String path = "src/main/resources/day03/test-input.txt";
@@ -68,7 +68,7 @@ public class P03_RugsackReorganisation {
 //        context.put("sharedItems", sharedItems);
 
         // answer
-        List<Long> sharedItemPrios = groups.stream().map(g->findSharedItem(g)).map(i->determinePriorityForItem(i)).collect(Collectors.toList());
+        List<Long> sharedItemPrios = groups.stream().map(P03_RugsackReorganisation::findSharedItem).map(P03_RugsackReorganisation::determinePriorityForItem).collect(Collectors.toList());
         long answer = sharedItemPrios.stream().collect(Collectors.summingLong(Long::longValue));
 
         AnswerPrinter.printAnswerDetails(1, 2, answer, TEST);
