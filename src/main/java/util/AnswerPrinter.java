@@ -9,7 +9,7 @@ public class AnswerPrinter {
     // print answer with context details
     static public void printAnswerDetails(int day, int part, Object answer, Map<String, Object> context, boolean test) {
         String appendix = test ? "(!!!TEST!!!)" : "";
-        System.out.printf("answer day %s, part #%d: %d (%s) %s",
+        System.out.printf("answer day %s, part #%d: %s (%s) %s",
                 String.format("%02d", day),
                 part,
                 answer,
@@ -21,7 +21,7 @@ public class AnswerPrinter {
     // print answer without context details
     static public void printAnswerDetails(int day, int part, Object answer,boolean test) {
         String appendix = test ? "(!!!TEST!!!)" : "";
-        System.out.printf("answer day %s, part #%d: %d %s",
+        System.out.printf("answer day %s, part #%d: %s %s",
                 String.format("%02d", day),
                 part,
                 answer,
