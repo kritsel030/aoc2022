@@ -26,111 +26,54 @@ public class P09_RobeBridge {
 
     // answer: 6642
     static void doPart1(List<String> inputLines) {
-        int[] headPosition = {500,500};
-        int[] tailPosition = {500,500};
-        int[] startPosition = {500,500};
+        // initialize the grid
+        long[][] grid = init2dGrid(1500, 1500);
 
-        long[][] grid = init2dGrid(1000,1000);
-        Map<int[], Character> specialMarkers = new HashMap<>();
-        specialMarkers.put(startPosition, 's');
-        specialMarkers.put(headPosition, 'H');
-        specialMarkers.put(tailPosition, 'T');
+        // do the magic part
+        executeRopeScience(grid, inputLines, 2);
 
-        // mark current tailPosition in the grid
-        grid[tailPosition[0]][tailPosition[1]]++;
-
-//        printGrid(grid, specialMarkers);
-
-        int lineCount = 1;
-
-        for (String commandLine : inputLines) {
-            System.out.println();
-            System.out.println("executing command " + lineCount + ": " + commandLine);
-
-            String command = commandLine.split(" ")[0];
-            int steps = Integer.parseInt(commandLine.split(" ")[1]);
-
-            for (int s = 0; s < steps; s++) {
-
-                // move head
-                switch (command) {
-                    case "R":
-                        headPosition[0]++;
-                        break;
-                    case "L":
-                        headPosition[0]--;
-                        break;
-                    case "U":
-                        headPosition[1]++;
-                        break;
-                    case "D":
-                        headPosition[1]--;
-                        break;
-                }
-
-                followMove(headPosition, tailPosition);
-
-                // increase visit counter of tail position in the grid
-                grid[tailPosition[0]][tailPosition[1]]++;
-            }
-
-//            specialMarkers = new HashMap<>();
-//            specialMarkers.put(startPosition, 's');
-//            specialMarkers.put(headPosition, 'H');
-//            specialMarkers.put(tailPosition, 'T');
-//            printGrid(grid, specialMarkers);
-            lineCount++;
-        }
-
-        // count visited grid locations
-        long count = 0;
-        for (int x = 0; x < grid.length; x++) {
-            for (int y = 0; y < grid[x].length; y++) {
-                if (grid[x][y] > 0) {
-                    count++;
-                }
-            }
-        }
-        AnswerPrinter.printAnswerDetails(1, 1, count, TEST);
-
+        // count grid locations visited by the tail knot
+        long count = countVisitedGridLocations(grid);
+        AnswerPrinter.printAnswerDetails(1, 2, count, TEST);
     }
 
+    // answer: 2765
     static void doPart2(List<String> inputLines) {
-//        int[] headPosition = {500,500};
-//        int[] tailPosition = {500,500};
-//        int[] startPosition = {500,500};
+        // initialize the grid
+        long[][] grid = init2dGrid(1500, 1500);
 
-        int knots = 10;
+        // do the magic part
+        executeRopeScience(grid, inputLines, 10);
+
+        // count grid locations visited by the tail knot
+        long count = countVisitedGridLocations(grid);
+        AnswerPrinter.printAnswerDetails(1, 2, count, TEST);
+    }
+
+    private static void executeRopeScience(long[][] grid, List<String> inputLines, int numberOfKnots) {
+        int knots = numberOfKnots;
         int[][] knotPositions = new int[knots][2];
         for (int k = 0; k < knotPositions.length; k++) {
-            int[] centerPosition = {750, 750};
+            int[] centerPosition = {grid.length/2, grid.length/2};
             knotPositions[k] = centerPosition;
         }
-
-        long[][] grid = init2dGrid(1500, 1500);
-//        Map<int[], Character> specialMarkers = new HashMap<>();
-//        specialMarkers.put(startPosition, 's');
-//        specialMarkers.put(headPosition, 'H');
-//        specialMarkers.put(tailPosition, 'T');
 
         // mark current tailPosition in the grid
         grid[knotPositions[knots-1][0]][knotPositions[knots-1][1]]++;
 
-//        printGrid(grid, specialMarkers);
-
+        // loop through command lines
         int lineCount = 1;
-
         for (String commandLine : inputLines) {
-            System.out.println();
-            System.out.println("executing command " + lineCount + ": " + commandLine);
+//            System.out.println();
+//            System.out.println("executing command " + lineCount + ": " + commandLine);
 
-            String command = commandLine.split(" ")[0];
+            String direction = commandLine.split(" ")[0];
             int steps = Integer.parseInt(commandLine.split(" ")[1]);
 
             for (int s = 0; s < steps; s++) {
 
                 // move head (=knotPosition[0])
-                switch (command) {
+                switch (direction) {
                     case "R":
                         knotPositions[0][0]++;
                         break;
@@ -149,19 +92,15 @@ public class P09_RobeBridge {
                     followMove(knotPositions[k], knotPositions[k+1]);
                 }
 
-                // increase visit counter of tail position in the grid
+                // increase visit counter of tail knot position in the grid
                 grid[knotPositions[knots-1][0]][knotPositions[knots-1][1]]++;
             }
 
-//            specialMarkers = new HashMap<>();
-//            specialMarkers.put(startPosition, 's');
-//            specialMarkers.put(headPosition, 'H');
-//            specialMarkers.put(tailPosition, 'T');
-//            printGrid(grid, specialMarkers);
             lineCount++;
         }
+    }
 
-        // count visited grid locations
+    private static long countVisitedGridLocations(long[][] grid) {
         long count = 0;
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
@@ -170,8 +109,7 @@ public class P09_RobeBridge {
                 }
             }
         }
-        AnswerPrinter.printAnswerDetails(1, 2, count, TEST);
-
+        return count;
     }
 
     private static void followMove(int[] headPosition, int[] tailPosition) {
@@ -186,45 +124,45 @@ public class P09_RobeBridge {
         // head and tail touch, no need to move
         if (xDiff <= 1 && yDiff <= 1) {
             // no move
-            System.out.println("no move");
+            //System.out.println("no move");
         } else if (sameY) {
             // move X
             if (headHigherX) tailPosition[0]++;
             else tailPosition[0]--;
-            System.out.println("move horizontally");
+//            System.out.println("move horizontally");
         } else if (sameX) {
             // move Y
             if (headHigherY) tailPosition[1]++;
             else tailPosition[1]--;
-            System.out.println("move vertically");
+//            System.out.println("move vertically");
         } else {
             // move diagonally
             if (headHigherX && headHigherY) {
-                System.out.println("move diagonally: up and right");
+//                System.out.println("move diagonally: up and right");
                 tailPosition[0]++;
                 tailPosition[1]++;
             } else if (headHigherX && !headHigherY) {
-                System.out.println("move diagonally: down and right");
+//                System.out.println("move diagonally: down and right");
                 tailPosition[0]++;
                 tailPosition[1]--;
             } else if (!headHigherX && !headHigherY) {
-                System.out.println("move diagonally: down and left");
+//                System.out.println("move diagonally: down and left");
                 tailPosition[0]--;
                 tailPosition[1]--;
             } else if (!headHigherX && headHigherY) {
-                System.out.println("move diagonally: up and left");
+//                System.out.println("move diagonally: up and left");
                 tailPosition[0]--;
                 tailPosition[1]++;
             } else {
-                System.out.println("#######  something's wrong!!!");
+//                System.out.println("#######  something's wrong!!!");
             }
         }
 
-        System.out.println("head at " + headPosition[0] + "," + headPosition[1] + " | tail at " + tailPosition[0] + "," + tailPosition[1]);
+//        System.out.println("head at " + headPosition[0] + "," + headPosition[1] + " | tail at " + tailPosition[0] + "," + tailPosition[1]);
 
-        if (tailPosition[0] < 0 || tailPosition[1] < 0) {
-            System.out.println("tail position off the grid: x = " + tailPosition[0] + ", y = " + tailPosition[1]);
-        }
+//        if (tailPosition[0] < 0 || tailPosition[1] < 0) {
+//            System.out.println("tail position off the grid: x = " + tailPosition[0] + ", y = " + tailPosition[1]);
+//        }
     }
 
     static long[][] init2dGrid(int rows, int columns) {
