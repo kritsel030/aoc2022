@@ -33,8 +33,8 @@ public class P10_CathodeRayTube {
 
         long answer = s20 + s60 + s100 + s140 + s180 + s220;
         Map<String, Object> context = new HashMap<>();
-        context.put ("x 20", xCycleHistory.get(21));
-        context.put ("signal strength 20", xCycleHistory.get(21) * 20);
+        context.put ("x 20", xCycleHistory.get(20-1));
+        context.put ("signal strength 20", xCycleHistory.get(20-1) * 20);
 
         AnswerPrinter.printAnswerDetails(1, 1, answer, context, TEST);
 
@@ -61,8 +61,6 @@ public class P10_CathodeRayTube {
         // draw pixels
         List<Character> pixels = new ArrayList<>();
 
-        System.out.println( "test Math.floorDiv (39, 40) " + Math.floorDiv(39, 40));
-        System.out.println( "test Math.floorDiv (40, 40) " +  Math.floorDiv(40, 40));
         // pixel for location l is drawn during cycle c when the sprite during cycle c covers that location
         for (int c = 0; c < xCycleHistory.size(); c++) {
             long x = xCycleHistory.get(c);
@@ -70,12 +68,15 @@ public class P10_CathodeRayTube {
             if ( location-1 <= c && c <= location +1 ) {
                 pixels.add('#');
             } else {
-                pixels.add('.');
+                pixels.add(' ');
             }
         }
 
         // print pixels
         for (int i = 0; i < pixels.size(); i++) {
+            // print three-wide for better readability
+            System.out.print(pixels.get(i));
+            System.out.print(pixels.get(i));
             System.out.print(pixels.get(i));
             if ((i+1) % 40 == 0) {
                 System.out.println();
