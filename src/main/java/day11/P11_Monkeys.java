@@ -20,6 +20,7 @@ public class P11_Monkeys {
         doPart2(inputLines);
     }
 
+    // answer: 66124
     static void doPart1(List<String> inputLines) {
 
         Map<Integer, Monkey> monkeys = initMonkeys(inputLines, 1);
@@ -57,9 +58,9 @@ public class P11_Monkeys {
 
         int rounds = 10000;
         for (int i = 0; i < rounds; i++) {
-            System.out.println("round " + (i + 1));
+//            System.out.println("round " + (i + 1));
             for (int m = 0; m < monkeys.size(); m++) {
-                System.out.println("  monkey " + m);
+//                System.out.println("  monkey " + m);
                 monkeys.get(m).takeTurn(monkeys);
             }
         }
