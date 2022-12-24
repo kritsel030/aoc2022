@@ -16,7 +16,7 @@ public class P14_RegolithReservoir {
     public static void main (String[] args) {
         String path = "src/main/resources/day14/test-input.txt";
         if (!TEST) {
-            path = "src/main/resources/day14/real-input.txt";
+            path = "src/main/resources/day14/real-input.txt.txt";
         }
         List<String> inputLines = FileUtil.readAllLines(path);
         doPart1(inputLines);

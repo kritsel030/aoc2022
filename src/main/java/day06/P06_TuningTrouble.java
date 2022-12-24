@@ -18,7 +18,7 @@ public class P06_TuningTrouble {
 //            inputLine = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg";
             inputLine = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
         } else {
-            String path = "src/main/resources/day06/real-input.txt";
+            String path = "src/main/resources/day06/real-input.txt.txt";
             inputLine = FileUtil.readLine(path);
         }
         doPart1(inputLine);

@@ -12,7 +12,7 @@ public class P05_SupplyStacks {
     public static void main (String[] args) {
         String path = "src/main/resources/day05/test-input.txt";
         if (!TEST) {
-            path = "src/main/resources/day05/real-input.txt";
+            path = "src/main/resources/day05/real-input.txt.txt";
         }
         List<String> inputLines = FileUtil.readAllLines(path);
         moveCrates(inputLines, 1);

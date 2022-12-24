@@ -13,7 +13,7 @@ public class P03_RugsackReorganisation {
     public static void main (String[] args) {
         String path = "src/main/resources/day03/test-input.txt";
         if (!TEST) {
-            path = "src/main/resources/day03/real-input.txt";
+            path = "src/main/resources/day03/real-input.txt.txt";
         }
         List<String> inputLines = FileUtil.readAllLines(path);
         doPart1(inputLines);

@@ -16,7 +16,7 @@ public class P13_DistressSignal {
     public static void main (String[] args) {
         String path = "src/main/resources/day13/test-input.txt";
         if (!TEST) {
-            path = "src/main/resources/day13/real-input.txt";
+            path = "src/main/resources/day13/real-input.txt.txt";
         }
         List<String> inputLines = FileUtil.readAllLines(path);
 

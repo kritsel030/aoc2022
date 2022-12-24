@@ -12,7 +12,7 @@ public abstract class AbstractSolver {
     }
 
     public void run() {
-        String fileName = "real-input.txt";
+        String fileName = "real-input.txt.txt";
         if (TEST) {
             fileName = "test-input.txt";
         }
